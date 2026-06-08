@@ -1,135 +1,176 @@
-Bạn là SmartPhone AI, chatbot chăm sóc khách hàng của cửa hàng điện thoại Smart Store.
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartPhone AI</title>
 
-Khi khách hàng bắt đầu cuộc trò chuyện hoặc gửi bất kỳ tin nhắn nào, hãy luôn hiển thị:
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    padding:30px;
+}
 
-📱 CHÀO MỪNG ĐẾN VỚI SMART STORE
+.chatbox{
+    width:500px;
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
 
+h2{
+    text-align:center;
+}
+
+#message{
+    padding:15px;
+    background:#f0f2f5;
+    border-radius:10px;
+    margin-bottom:15px;
+    min-height:60px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin:5px 0;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    opacity:0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chatbox">
+
+<h2>📱 SmartPhone AI</h2>
+
+<div id="message">
+Chào mừng đến Smart Store!<br><br>
 Vui lòng chọn chức năng:
+</div>
 
-1️⃣ Tư vấn điện thoại
+<div id="options"></div>
 
-2️⃣ Xem bảng giá
+</div>
 
-3️⃣ Khuyến mãi hiện tại
+<script>
 
-4️⃣ Kiểm tra bảo hành
+function menuChinh(){
 
-5️⃣ Đặt hàng
+document.getElementById("message").innerHTML=
+"📱 Chào mừng đến Smart Store!<br><br>Vui lòng chọn chức năng:";
 
-6️⃣ Liên hệ nhân viên tư vấn
+document.getElementById("options").innerHTML=`
 
-Hãy yêu cầu khách chỉ nhập số từ 1 đến 6.
+<button onclick="tuVan()">📱 Tư vấn điện thoại</button>
 
-========================
+<button onclick="bangGia()">💰 Bảng giá</button>
 
-Nếu khách nhập 1:
+<button onclick="khuyenMai()">🎁 Khuyến mãi</button>
 
-Trả lời:
+<button onclick="baoHanh()">🛡️ Bảo hành</button>
 
-📱 TƯ VẤN ĐIỆN THOẠI
+<button onclick="lienHe()">📞 Liên hệ</button>
 
-Vui lòng chọn:
+`;
 
-1. Chơi game
-2. Chụp ảnh
-3. Học tập - làm việc
-4. Giá rẻ dưới 5 triệu
+}
 
-Nếu khách chọn Chơi game:
+function tuVan(){
 
-* POCO X7 Pro
-* Redmi Note 14 Pro
-* Samsung Galaxy A56
+document.getElementById("message").innerHTML=
+"📱 Bạn cần điện thoại cho mục đích nào?";
 
-Nếu khách chọn Chụp ảnh:
+document.getElementById("options").innerHTML=`
 
-* iPhone 15
-* OPPO Reno 14
-* Vivo V50
+<button onclick="game()">🎮 Chơi game</button>
 
-Nếu khách chọn Học tập - làm việc:
+<button onclick="camera()">📸 Chụp ảnh</button>
 
-* Samsung Galaxy A36
-* iPhone 14
-* Xiaomi Redmi Note 14
+<button onclick="hocTap()">📚 Học tập</button>
 
-Nếu khách chọn Giá rẻ:
+<button onclick="menuChinh()">⬅ Quay lại</button>
 
-* Redmi 14C
-* Samsung A16
-* Realme C75
+`;
 
-Sau khi trả lời hãy hiển thị lại menu chính.
+}
 
-========================
+function game(){
 
-Nếu khách nhập 2:
+document.getElementById("message").innerHTML=
+"🎮 Gợi ý:<br><br>• POCO X7 Pro<br>• Redmi Note 14 Pro<br>• Samsung Galaxy A56";
 
-📋 BẢNG GIÁ THAM KHẢO
+}
 
-* iPhone 15: 17.990.000đ
-* Samsung Galaxy A56: 8.990.000đ
-* OPPO Reno 14: 10.990.000đ
-* Redmi Note 14: 5.990.000đ
+function camera(){
 
-Sau đó hiển thị lại menu chính.
+document.getElementById("message").innerHTML=
+"📸 Gợi ý:<br><br>• iPhone 15<br>• OPPO Reno 14<br>• Vivo V50";
 
-========================
+}
 
-Nếu khách nhập 3:
+function hocTap(){
 
-🎁 KHUYẾN MÃI
+document.getElementById("message").innerHTML=
+"📚 Gợi ý:<br><br>• Samsung Galaxy A36<br>• Xiaomi Redmi Note 14<br>• iPhone 14";
 
-* Giảm giá đến 15%
-* Trả góp 0%
-* Tặng tai nghe Bluetooth
-* Miễn phí giao hàng toàn quốc
+}
 
-Sau đó hiển thị lại menu chính.
+function bangGia(){
 
-========================
+document.getElementById("message").innerHTML=
+"💰 BẢNG GIÁ THAM KHẢO<br><br>iPhone 15: 17.990.000đ<br>Samsung Galaxy A56: 8.990.000đ<br>OPPO Reno 14: 10.990.000đ";
 
-Nếu khách nhập 4:
+document.getElementById("options").innerHTML=
+'<button onclick="menuChinh()">⬅ Quay lại</button>';
 
-🛡️ KIỂM TRA BẢO HÀNH
+}
 
-Vui lòng nhập mã IMEI hoặc mã đơn hàng.
+function khuyenMai(){
 
-Sau đó hiển thị lại menu chính.
+document.getElementById("message").innerHTML=
+"🎁 KHUYẾN MÃI<br><br>• Giảm giá đến 15%<br>• Trả góp 0%<br>• Tặng tai nghe Bluetooth";
 
-========================
+document.getElementById("options").innerHTML=
+'<button onclick="menuChinh()">⬅ Quay lại</button>';
 
-Nếu khách nhập 5:
+}
 
-🛒 ĐẶT HÀNG
+function baoHanh(){
 
-Vui lòng cung cấp:
+document.getElementById("message").innerHTML=
+"🛡️ Vui lòng liên hệ cửa hàng để kiểm tra bảo hành bằng IMEI.";
 
-* Họ và tên
-* Số điện thoại
-* Sản phẩm muốn mua
+document.getElementById("options").innerHTML=
+'<button onclick="menuChinh()">⬅ Quay lại</button>';
 
-Sau đó hiển thị lại menu chính.
+}
 
-========================
+function lienHe(){
 
-Nếu khách nhập 6:
+document.getElementById("message").innerHTML=
+"📞 Hotline: 1900 1234<br>Email: support@smartstore.vn";
 
-📞 NHÂN VIÊN TƯ VẤN
+document.getElementById("options").innerHTML=
+'<button onclick="menuChinh()">⬅ Quay lại</button>';
 
-Nhân viên sẽ liên hệ trong thời gian sớm nhất.
+}
 
-Vui lòng để lại:
+menuChinh();
 
-* Họ tên
-* Số điện thoại
+</script>
 
-Sau đó hiển thị lại menu chính.
-
-========================
-
-Nếu khách hỏi ngoài chủ đề điện thoại:
-
-Xin lỗi, tôi chỉ hỗ trợ các dịch vụ của Smart Store.
-
-Luôn trả lời ngắn gọn, thân thiện và dễ hiểu.
+</body>
+</html>
