@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPhone AI - Hệ Thống Tư Vấn Cao Cấp</title>
-    <!-- Font chữ Inter hiện đại -->
+    <title>SmartPhone AI - Trợ Lý Tư Vấn Cá Nhân</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #0071e3; /* Xanh Apple Modern */
+            --primary: #0071e3;
             --bg: #f5f5f7;
             --card: #ffffff;
             --text: #1d1d1f;
-            --text-muted: #86868b;
+            --text-muted: #6e6e73;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,17 +28,15 @@
             padding: 20px;
         }
 
-        /* Khung chứa giao diện */
         .quiz-container {
             background: var(--card);
-            max-width: 500px;
+            max-width: 520px;
             width: 100%;
-            padding: 35px 30px;
-            border-radius: 20px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
         }
 
-        /* Thanh tiến trình (Progress Bar) cho biết đang ở bước mấy */
         .progress-bar {
             height: 6px;
             background: #e5e5e7;
@@ -50,75 +47,62 @@
         .progress-fill {
             height: 100%;
             background: var(--primary);
-            width: 33%; /* Thay đổi theo từng bước */
+            width: 33%;
             transition: width 0.3s ease;
         }
 
-        /* Tiêu đề từng bước */
         h2 {
             font-size: 22px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
+            line-height: 1.3;
         }
         .subtitle {
             color: var(--text-muted);
             font-size: 14px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            line-height: 1.4;
         }
 
-        /* Các bước (Step) mặc định sẽ ẩn, chỉ hiện bước active */
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.4s ease; }
 
-        /* Danh sách các nút lựa chọn */
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 14px;
+            margin-bottom: 30px;
         }
 
-        /* Style nhãn lựa chọn (Radio Button ẩn đi, biến thành nút bấm lớn) */
-        .option-item {
-            display: block;
-            cursor: pointer;
-        }
-        .option-item input { display: none; } /* Ẩn cái chấm tròn mặc định của html đi */
+        .option-item { display: block; cursor: pointer; }
+        .option-item input { display: none; }
         
         .option-card {
             background: #ffffff;
             border: 1px solid #e5e5e7;
-            padding: 16px 20px;
-            border-radius: 12px;
+            padding: 18px 20px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 500;
             transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
         .option-item:hover .option-card {
             border-color: #b4b4b6;
             background: #fafafa;
         }
-        /* Khi người dùng chọn (click) vào nút */
         .option-item input:checked + .option-card {
             border-color: var(--primary);
             background: rgba(0, 113, 227, 0.04);
             font-weight: 600;
+            box-shadow: 0 0 0 1px var(--primary);
         }
 
-        /* Cụm nút Điều hướng (Quay lại / Tiếp theo) */
-        .nav-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: space-between;
-        }
+        .nav-buttons { display: flex; gap: 12px; }
         .btn {
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             border: none;
@@ -129,27 +113,35 @@
         .btn-next { background: var(--primary); color: white; margin-left: auto; }
         .btn-next:hover { background: #0066cc; }
 
-        /* Khung hiển thị kết quả tư vấn chuyên nghiệp */
-        .result-box {
-            background: #f4fbf7;
-            border: 1px solid #c2ebd4;
-            padding: 20px;
-            border-radius: 14px;
+        /* Giao diện hộp thoại tư vấn cá nhân */
+        .advisor-speech {
+            background: #fbfbfd;
+            border: 1px solid #e5e5e7;
+            padding: 24px;
+            border-radius: 16px;
             margin-top: 15px;
-        }
-        .phone-tag {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1d1d1f;
-            margin: 10px 0;
-        }
-        .analysis-list {
-            margin-top: 12px;
-            padding-left: 18px;
-            font-size: 14px;
             line-height: 1.6;
+            font-size: 15px;
         }
-        .analysis-list li { margin-bottom: 8px; }
+        .advisor-avatar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .rec-box {
+            background: rgba(0, 113, 227, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 4px 12px 12px 4px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -160,27 +152,25 @@
 <body>
 
 <div class="quiz-container">
-    <!-- Thanh tiến trình -->
     <div class="progress-bar">
         <div id="progress" class="progress-fill"></div>
     </div>
 
-    <!-- BƯỚC 1: CHỌN NHU CẦU -->
     <div id="step1" class="step active">
-        <h2>Bạn mua điện thoại để làm gì?</h2>
-        <p class="subtitle">Bước 1/2: Xác định mục đích sử dụng cốt lõi của bạn.</p>
+        <h2>Chào bạn, mục đích chính khi bạn tìm mua chiếc điện thoại mới này là gì?</h2>
+        <p class="subtitle">Hãy chọn trải nghiệm mà bạn muốn chiếc máy phục vụ tốt nhất nhé.</p>
         <div class="options-list">
             <label class="option-item">
                 <input type="radio" name="nhuCau" value="gaming" checked>
-                <div class="option-card">🎮 Tập trung chơi game, cấu hình cao</div>
+                <div class="option-card">🎮 Mình muốn một cấu hình thật mạnh để cày game mượt mà</div>
             </label>
             <label class="option-item">
                 <input type="radio" name="nhuCau" value="camera">
-                <div class="option-card">📸 Chụp ảnh đẹp, quay phim sắc nét</div>
+                <div class="option-card">📸 Mình chú trọng camera để chụp ảnh và quay video thật nét</div>
             </label>
             <label class="option-item">
                 <input type="radio" name="nhuCau" value="hocTap">
-                <div class="option-card">📚 Học tập, làm việc, lướt mạng xã hội</div>
+                <div class="option-card">📚 Mình cần máy chạy ổn định, pin trâu để học tập và làm việc</div>
             </label>
         </div>
         <div class="nav-buttons">
@@ -188,158 +178,125 @@
         </div>
     </div>
 
-    <!-- BƯỚC 2: CHỌN NGÂN SÁCH -->
     <div id="step2" class="step">
-        <h2>Ngân sách dự kiến của bạn?</h2>
-        <p class="subtitle">Bước 2/2: Hạn mức chi phí bạn muốn đầu tư cho thiết bị.</p>
+        <h2>Hạn mức chi phí mà bạn cảm thấy thoải mái nhất để đầu tư là bao nhiêu?</h2>
+        <p class="subtitle">Yếu tố này sẽ giúp mình lọc ra chiếc máy có giá trị sử dụng tối ưu nhất trên từng đồng chi phí.</p>
         <div class="options-list">
             <label class="option-item">
                 <input type="radio" name="nganSach" value="thap" checked>
-                <div class="option-card">💰 Phân khúc Phổ thông (Dưới 7 triệu)</div>
+                <div class="option-card">💰 Mình muốn tiết kiệm tối đa, ngân sách dưới 7 triệu</div>
             </label>
             <label class="option-item">
                 <input type="radio" name="nganSach" value="trung">
-                <div class="option-card">💎 Phân khúc Tầm trung (7 - 15 triệu)</div>
+                <div class="option-card">💎 Tầm trung, dao động từ 7 đến 15 triệu là hợp lý</div>
             </label>
             <label class="option-item">
                 <input type="radio" name="nganSach" value="cao">
-                <div class="option-card">👑 Phân khúc Cao cấp (Trên 15 triệu)</div>
+                <div class="option-card">👑 Mình sẵn sàng đầu tư phân khúc cao cấp, trên 15 triệu</div>
             </label>
         </div>
         <div class="nav-buttons">
             <button class="btn btn-back" onclick="chuyenBuoc(1)">← Quay lại</button>
-            <button class="btn btn-next" onclick="tínhToanKetQua()">Xem kết quả</button>
+            <button class="btn btn-next" onclick="tínhToanKetQua()">Phân tích kết quả</button>
         </div>
     </div>
 
-    <!-- BƯỚC 3: HIỂN THỊ KẾT QUẢ TƯ VẤN CHUYÊN NGHIỆP -->
     <div id="step3" class="step">
-        <h2>Phân tích từ chuyên gia AI</h2>
-        <p class="subtitle">Dựa trên nhu cầu và tài chính cá nhân của bạn:</p>
+        <h2>Kết quả phân tích từ Trợ lý AI</h2>
+        <p class="subtitle">Dựa trên những chia sẻ thực tế về nhu cầu của bạn, đây là lời khuyên dành riêng cho bạn:</p>
         
-        <div class="result-box">
-            <div style="font-size: 12px; font-weight:700; color:#22c55e;">✔ THIẾT BỊ PHÙ HỢP NHẤT</div>
-            <div id="tenDienThoai" class="phone-tag">Đang tính toán...</div>
-            <hr style="border:0; border-top:1px solid #e5e5e7; margin: 12px 0;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--text);">Lý do chuyên môn đề xuất:</div>
-            <ul id="lyDoPhanTich" class="analysis-list"></ul>
+        <div class="advisor-speech">
+            <div class="advisor-avatar">
+                🤖 Chuyên Gia Tư Vấn Điện Thoại
+            </div>
+            <div id="loiChaoKhach"></div>
+            
+            <div id="goiYMay" class="rec-box"></div>
+            
+            <div id="loiKhuyenChuyenSau" style="color: var(--text-muted);"></div>
         </div>
 
         <div class="nav-buttons" style="margin-top: 25px;">
-            <button class="btn btn-back" onclick="chuyenBuoc(1)" style="width: 100%; text-align: center;">Thực hiện lại tư vấn ↺</button>
+            <button class="btn btn-back" onclick="chuyenBuoc(1)" style="width: 100%; text-align: center;">Tư vấn lại từ đầu ↺</button>
         </div>
     </div>
 </div>
 
 <script>
-    // Hàm điều hướng chuyển qua lại giữa các bước
     function chuyenBuoc(buoc) {
-        // Ẩn tất cả các bước
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        
-        // Hiện bước được chỉ định
         document.getElementById('step' + buoc).classList.add('active');
 
-        // Cập nhật thanh tiến trình (Progress Bar)
         const progressFill = document.getElementById('progress');
         if (buoc === 1) progressFill.style.width = '33%';
         if (buoc === 2) progressFill.style.width = '66%';
         if (buoc === 3) progressFill.style.width = '100%';
     }
 
-    // Logic xử lý kết quả thông minh dựa trên tổ hợp lựa chọn (Nhu cầu + Ngân sách)
     function tínhToanKetQua() {
-        // Lấy giá trị người dùng đã tích chọn bằng radio button
         const nhuCau = document.querySelector('input[name="nhuCau"]:checked').value;
         const nganSach = document.querySelector('input[name="nganSach"]:checked').value;
 
-        let sanPham = "";
-        let phanTich = [];
+        let loiChao = "";
+        let goiY = "";
+        let loiKhuyen = "";
 
-        // Ma trận thuật toán tư vấn
+        // TÌNH HUỐNG 1: CHƠI GAME
         if (nhuCau === 'gaming') {
-            if (nganSach === 'thap') {
-                sanPham = "Tecno Pova 6 hoặc Redmi Note 13";
-                phanTich = [
-                    "Được trang bị viên pin cực khủng giúp tối ưu thời gian on-screen chiến game liên tục không ngắt quãng.",
-                    "Sử dụng dòng chip xử lý tối ưu hiệu năng tốt nhất trong tầm giá dưới 7 triệu, hạn chế tụt FPS.",
-                    "Màn hình tần số quét cao mang lại phản hồi vuốt chạm nhanh khi thực hiện các thao tác combat."
-                ];
-            } else if (nganSach === 'trung') {
-                sanPham = "Samsung Galaxy A56 Chính Hãng";
-                phanTich = [
-                    "Sở hữu cấu hình thế hệ mới vượt trội, xử lý mượt mà mức đồ họa cao của Liên Quân, PUBG Mobile.",
-                    "Hệ thống tản nhiệt buồng hơi cải tiến giúp máy mát mẻ, giữ vững độ ổn định khi chơi game lâu.",
-                    "Màn hình Super AMOLED 120Hz chuẩn rực rỡ, nâng cấp trải nghiệm thị giác sống động."
-                ];
-            } else {
-                sanPham = "iPhone 15 Pro Max hoặc ROG Phone 8";
-                phanTich = [
-                    "Dòng chip xử lý thuộc top mạnh nhất thế giới hiện nay, cân mượt mọi tựa game nặng ở thiết lập đồ họa tối đa.",
-                    "Tốc độ làm tươi màn hình siêu nhạy và công nghệ tối ưu hóa tài nguyên phần cứng đỉnh cao.",
-                    "Độ trễ hệ thống gần như bằng 0, mang lại lợi thế tuyệt đối cho các trận đấu xếp hạng chuyên nghiệp."
-                ];
+            loiChao = "Mình hiểu một game thủ luôn cần một chiếc máy có hiệu năng thật bền bỉ để không bị ức chế khi leo rank. Tuy nhiên, vì bạn muốn tối ưu chi phí ở mức <strong>dưới 7 triệu</strong>, chúng ta sẽ tập trung hoàn toàn vào chip và pin.";
+            goiY = "💡 Thiết bị phù hợp nhất cho bạn: Tecno Pova 6 hoặc Redmi Note 13 Pro";
+            loiKhuyen = "Với tầm giá này, mình khuyên bạn không nên quá đòi hỏi vào camera hay thiết kế sang chảnh. Hai chiếc máy này sở hữu viên pin cực kỳ trâu kèm màn hình tần số quét cao, giúp các thao tác vuốt chạm tung chiêu của bạn mượt mà và không lo sập nguồn giữa trận đấu.";
+            
+            if (nganSach === 'trung') {
+                loiChao = "Tuyệt vời, với ngân sách <strong>từ 7 đến 15 triệu</strong>, bạn đã có một không gian rất tốt để lựa chọn một cỗ máy chiến game có hệ thống tản nhiệt xịn và màn hình đẹp.";
+                goiY = "💡 Thiết bị phù hợp nhất cho bạn: Samsung Galaxy A56 Chính Hãng";
+                loiKhuyen = "Chiếc máy này sở hữu dòng chip xử lý thế hệ mới tối ưu đồ họa cực mượt. Lời khuyên của mình dành cho bạn là hãy tự tin bật thiết lập FPS cao trong các tựa game như Liên Quân hay PUBG Mobile, hệ thống tản nhiệt buồng hơi trên máy sẽ giữ thiết bị luôn mát mẻ và ổn định xuyên suốt các trận combat.";
+            } else if (nganSach === 'cao') {
+                loiChao = "Với mức đầu tư <strong>trên 15 triệu</strong>, bạn rõ ràng đang tìm kiếm một trải nghiệm chiến game đỉnh cao, không chấp nhận bất kỳ sự giật lag nào dù là nhỏ nhất.";
+                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 15 Pro Max hoặc ROG Phone 8";
+                loiKhuyen = "Đây là những 'quái vật hiệu năng' ở thời điểm hiện tại. Lời khuyên từ chuyên gia là bạn hoàn toàn có thể cân mượt mọi tựa game nặng nhất thế giới ở mức cấu hình Max Setting. Độ trễ hệ thống gần như bằng 0 sẽ mang lại cho bạn lợi thế phản xạ tuyệt đối trước đối thủ.";
             }
         } 
+        
+        // TÌNH HUỐNG 2: CHỤP ẢNH
         else if (nhuCau === 'camera') {
-            if (nganSach === 'thap') {
-                sanPham = "Oppo A78 hoặc Vivo Y36";
-                phanTich = [
-                    "Tích hợp các chế độ làm đẹp bằng AI thông minh giúp ảnh chụp chân dung sáng, mịn và nịnh mắt tự nhiên.",
-                    "Giao diện camera đơn giản, dễ thao tác đối với người dùng phổ thông.",
-                    "Độ phân giải camera chính lớn giúp lưu lại độ chi tiết tốt trong điều kiện đủ sáng."
-                ];
-            } else if (nganSach === 'trung') {
-                sanPham = "Samsung Galaxy S23 FE";
-                phanTich = [
-                    "Sở hữu ống kính zoom quang học thực tế và tính năng chống rung OIS cao cấp giúp quay phim không bị rung lắc.",
-                    "Thuật toán xử lý ảnh đêm xuất sắc, giữ được độ trong và giảm nhiễu hạt (noise) tối đa.",
-                    "Màu sắc ảnh có chiều sâu nghệ thuật, chuẩn tông màu phục vụ nhu cầu đăng tải mạng xã hội."
-                ];
-            } else {
-                sanPham = "iPhone 15 Pro hoặc Galaxy S24 Ultra";
-                phanTich = [
-                    "Hệ thống camera chuyên nghiệp hàng đầu thế giới với khả năng quay video chuẩn ProRes/Cinematic đỉnh cao.",
-                    "Ống kính tiềm vọng zoom xa siêu sắc nét và cảm biến lớn thu trọn mọi chi tiết ánh sáng.",
-                    "Hỗ trợ các công cụ hậu kỳ chỉnh sửa ảnh sâu bằng trí tuệ nhân tạo (AI) ngay trên máy."
-                ];
+            loiChao = "Để phục vụ đam mê nhiếp ảnh với mức ngân sách tiết kiệm <strong>dưới 7 triệu</strong>, chúng ta sẽ chọn những chiếc máy có thuật toán phần mềm xử lý ảnh tốt để bù đắp cho phần cứng.";
+            goiY = "💡 Thiết bị phù hợp nhất cho bạn: Oppo A78 hoặc Vivo Y36";
+            loiKhuyen = "Thay vì các thông số hầm hố, hai dòng máy này được tích hợp AI làm đẹp cực kỳ thông minh. Lời khuyên của mình là bạn nên chụp ở môi trường đủ sáng, máy sẽ cho ra những bức ảnh chân dung bắt mắt, màu da mịn màng nịnh mắt mà không cần tốn công chỉnh sửa qua app ứng dụng bên thứ ba.";
+            
+            if (nganSach === 'trung') {
+                loiChao = "Chào bạn, với tài chính <strong>7 - 15 triệu</strong> đầu tư cho camera, bạn đã có thể tiếp cận công nghệ chống rung của các dòng flagship cận cao cấp rồi.";
+                goiY = "💡 Thiết bị phù hợp nhất cho bạn: Samsung Galaxy S23 FE";
+                loiKhuyen = "Điểm đáng tiền nhất ở chiếc máy này là hệ thống ống kính có chống rung quang học OIS. Nếu bạn có sở thích quay video ngắn, làm Tiktok hay Reels, đây là lựa chọn cực tốt vì hình ảnh sẽ không bị rung lắc, thuật toán xử lý ảnh đêm cũng rất trong trẻo, ít bị nhiễu hạt.";
+            } else if (nganSach === 'cao') {
+                loiChao = "Bạn là người cực kỳ khắt khe về chất lượng hình ảnh và có thể đang làm công việc sáng tạo nội dung chuyên nghiệp, mức đầu tư <strong>trên 15 triệu</strong> là hoàn toàn xứng đáng.";
+                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 15 Pro hoặc Galaxy S24 Ultra";
+                loiKhuyen = "Hệ thống thấu kính và cảm biến lớn trên các dòng máy này thu trọn mọi chi tiết ánh sáng. Mình khuyên bạn nên thử nghiệm tính năng quay video chuẩn điện ảnh Cinematic hoặc chụp ảnh định dạng RAW, bạn sẽ có những thước phim chân thực, sắc nét và giữ nguyên được chiều sâu nghệ thuật để hậu kỳ.";
             }
         } 
+        
+        // TÌNH HUỐNG 3: HỌC TẬP, ĐI LÀM
         else if (nhuCau === 'hocTap') {
-            if (nganSach === 'thap') {
-                sanPham = "Xiaomi Redmi 13";
-                phanTich = [
-                    "Chi phí sở hữu cực kỳ tiết kiệm nhưng mang lại màn hình rộng rãi, dễ dàng đọc tài liệu và xem bài giảng trực tuyến.",
-                    "Đáp ứng mượt mà và ổn định các ứng dụng liên lạc hàng ngày, tra cứu tài liệu học tập.",
-                    "Thời lượng pin thoải mái cho cả ngày dài học tập và di chuyển trên trường lớp."
-                ];
-            } else if (nganSach === 'trung') {
-                sanPham = "iPhone 13 (128GB) hoặc Galaxy A35";
-                phanTich = [
-                    "Độ bền bỉ phần cứng cao, hệ điều hành tối ưu cực tốt giúp máy chạy mượt suốt 3-4 năm học đại học.",
-                    "Khả năng đa nhiệm tốt, chuyển đổi qua lại giữa các ứng dụng mượt mà không bị giật lag.",
-                    "Thiết kế thời thượng, trẻ trung, phù hợp với phong cách của học sinh, sinh viên."
-                ];
-            } else {
-                sanPham = "iPhone 15 Plus";
-                phanTich = [
-                    "Sự kết hợp hoàn hảo giữa không gian màn hình lớn siêu nét và viên pin thuộc hàng trâu nhất hiện nay.",
-                    "Hỗ trợ công việc, xử lý tài liệu, file Excel hay ứng dụng văn phòng mượt mà như một chiếc máy tính thu nhỏ.",
-                    "Giá trị giữ giá cao, nhận hỗ trợ cập nhật phần mềm lâu dài từ nhà sản xuất."
-                ];
+            loiChao = "Nếu mục tiêu là phục vụ học tập ổn định với chi phí tối ưu <strong>dưới 7 triệu</strong>, ưu tiên hàng đầu của chúng ta là một không gian màn hình lớn và độ bền cao.";
+            goiY = "💡 Thiết bị phù hợp nhất cho bạn: Xiaomi Redmi 13";
+            loiKhuyen = "Chiếc máy này đáp ứng rất mượt các tác vụ tra cứu tài liệu, lướt mạng xã hội và xem bài giảng trực tuyến trực quan nhờ màn hình rộng rãi. Viên pin lớn giúp bạn thoải mái mang máy lên giảng đường cả ngày dài mà không cần đem theo cục sạc cồng kềnh.";
+            
+            if (nganSach === 'trung') {
+                loiChao = "Với mức ngân sách tầm trung <strong>7 - 15 triệu</strong>, bạn hoàn toàn có thể sở hữu một thiết bị vừa sang trọng vừa có tuổi thọ sử dụng lâu dài suốt nhiều năm đại học.";
+                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 13 (128GB) hoặc Galaxy A35";
+                loiKhuyen = "Lời khuyên của mình là hãy ưu tiên sự tối ưu của hệ điều hành. Những chiếc máy này có khả năng đa nhiệm rất tốt, chuyển đổi qua lại giữa các ứng dụng mượt mà và đặc biệt là linh kiện rất bền, giúp bạn yên tâm sử dụng ổn định suốt 3-4 năm tới mà không lo máy bị chậm đi.";
+            } else if (nganSach === 'cao') {
+                loiChao = "Khi bạn sẵn sàng đầu tư <strong>trên 15 triệu</strong> cho một chiếc máy làm việc, bạn xứng đáng nhận được trải nghiệm đỉnh cao và toàn diện nhất.";
+                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 15 Plus";
+                loiKhuyen = "Chiếc máy này giống như một văn phòng thu nhỏ nhờ sự kết hợp giữa màn hình lớn siêu nét và viên pin thuộc hàng tốt nhất thị trường. Bạn có thể xử lý các tệp tài liệu, file Excel hay check mail công việc mượt mà liên tục. Hơn nữa, dòng máy cao cấp này luôn giữ giá tốt và được nhà sản xuất cập nhật phần mềm rất lâu dài.";
             }
         }
 
-        // Đổ dữ liệu ra giao diện kết quả
-        document.getElementById("tenDienThoai").innerText = sanPham;
-        
-        let listHtml = "";
-        phanTich.forEach(item => {
-            listHtml += `<li>${item}</li>`;
-        });
-        document.getElementById("lyDoPhanTich").innerHTML = listHtml;
+        // Đổ văn bản đối thoại vào giao diện
+        document.getElementById("loiChaoKhach").innerHTML = loiChao;
+        document.getElementById("goiYMay").innerHTML = goiY;
+        document.getElementById("loiKhuyenChuyenSau").innerHTML = loiKhuyen;
 
-        // Chuyển sang bước 3 để xem kết quả
         chuyenBuoc(3);
     }
 </script>
