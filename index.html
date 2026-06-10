@@ -1,118 +1,213 @@
-function tuVan(){
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphone AI Premium</title>
+    <!-- Chèn Font và Icon cho hiện đại -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
 
-document.getElementById("message").innerHTML=
-`🤖 SMARTPHONE AI PREMIUM
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-Xin chào quý khách.
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
 
-SmartPhone AI sẽ hỗ trợ lựa chọn sản phẩm phù hợp dựa trên nhu cầu sử dụng thực tế, ngân sách và các tiêu chí quan trọng như hiệu năng, camera, pin và độ bền.
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-Vui lòng chọn nhu cầu chính của bạn bên dưới để nhận tư vấn chi tiết.`;
+        p.intro {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 15px;
+        }
 
-document.getElementById("options").innerHTML=`
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
 
-<button onclick="showResult(`
+        .btn-option {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
 
-🎮 TƯ VẤN CHƠI GAME
+        .btn-option:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
 
-Dựa trên nhu cầu chơi game, SmartPhone AI đề xuất Samsung Galaxy A56.
+        .result-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease;
+        }
 
-✨ Ưu điểm nổi bật:
+        .result-title {
+            font-weight: 700;
+            color: #15803d;
+            margin-top: 0;
+            font-size: 18px;
+        }
 
-• Màn hình Super AMOLED 120Hz cho trải nghiệm mượt mà.
+        .features-list {
+            margin: 12px 0 0 0;
+            padding-left: 20px;
+            color: #1e293b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
 
-• Hiệu năng mạnh mẽ đáp ứng tốt Liên Quân Mobile, PUBG Mobile, Free Fire và nhiều tựa game phổ biến khác.
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
 
-• Pin dung lượng 5000mAh cho thời gian sử dụng dài.
+<div class="container">
+    <div id="message">
+        <!-- Nội dung chào mừng sẽ tự động load ở đây -->
+    </div>
+    
+    <div id="options" class="options-grid">
+        <!-- Các nút lựa chọn tư vấn sẽ load ở đây -->
+    </div>
 
-• Sạc nhanh giúp tiết kiệm thời gian chờ đợi.
+    <div id="result">
+        <!-- Kết quả tư vấn chuyên nghiệp hiện ở đây -->
+    </div>
+</div>
 
-• Thiết kế hiện đại, phù hợp học sinh, sinh viên và người yêu thích công nghệ.
+<script>
+    // 1. Dữ liệu tư vấn (Dễ dàng chỉnh sửa, thêm bớt điện thoại)
+    const dataTuVan = {
+        gaming: {
+            title: "🎮 GIẢI TRÍ & CHIẾN GAME ĐỈNH CAO",
+            recommend: "Samsung Galaxy A56",
+            details: [
+                "Màn hình Super AMOLED 120Hz mang lại trải nghiệm vuốt chạm cực kỳ mượt mà, giảm độ trễ tối đa khi combat.",
+                "Hiệu năng mạnh mẽ trong phân khúc, tối ưu tốt cho các tựa game phổ biến như Liên Quân Mobile, PUBG Mobile, Free Fire.",
+                "Hệ thống tản nhiệt cải tiến giúp duy trì FPS ổn định và viên pin 5000mAh cho thời gian chơi game bền bỉ cả ngày."
+            ]
+        },
+        camera: {
+            title: "📸 NHIẾP ẢNH & SÁNG TẠO NỘI DUNG",
+            recommend: "iPhone 13 Pro hoặc Samsung Galaxy S23 FE",
+            details: [
+                "Hệ thống camera cao cấp hỗ trợ chống rung quang học OIS, bắt trọn khoảnh khắc sắc nét ngay cả trong điều kiện thiếu sáng.",
+                "Khả năng quay video chuẩn cinematic, màu sắc chân thực, phù hợp cho các bạn làm sáng tạo nội dung (Tiktok, Reels).",
+                "Tính năng xử lý AI thông minh giúp tối ưu hóa màu da và phong cảnh tự động ngay sau khi chụp."
+            ]
+        },
+        battery: {
+            title: "🔋 CÔNG VIỆC DI CHUYỂN & PIN TRÂU",
+            recommend: "Xiaomi Redmi Note 13 Pro+",
+            details: [
+                "Dung lượng pin lớn kết hợp thuật toán tiết kiệm điện năng, đáp ứng từ 1.5 đến 2 ngày sử dụng tần suất cao.",
+                "Công nghệ sạc siêu nhanh giúp nạp lại năng lượng chỉ trong vòng 20-30 phút, tối ưu cho người bận rộn.",
+                "Độ bền đạt chuẩn, bắt sóng khỏe và kết nối 5G ổn định khi di chuyển liên tục."
+            ]
+        },
+        budget: {
+            title: "💰 TỐI ƯU CHI PHÍ / HỌC TẬP",
+            recommend: "Oppo A78 hoặc Vivo Y36",
+            details: [
+                "Mức giá tiếp cận dễ dàng nhưng sở hữu thiết kế thời thượng, mỏng nhẹ và trẻ trung.",
+                "Cấu hình mượt mà cho các tác vụ hàng ngày: lướt web, học trực tuyến, xem phim và sử dụng mạng xã hội.",
+                "Chế độ bảo hành chính hãng dài hạn, linh kiện thay thế dễ tìm và tiết kiệm."
+            ]
+        }
+    };
 
-💰 Giá tham khảo: 8.990.000đ
+    // 2. Hàm khởi tạo giao diện ban đầu
+    function khoiTaoTuVan() {
+        // Hiện thông điệp chào mừng chuyên nghiệp
+        document.getElementById("message").innerHTML = `
+            <h1>🤖 SMARTPHONE AI PREMIUM</h1>
+            <p class="intro">
+                Xin chào quý khách. <strong>SmartPhone AI</strong> sẽ hỗ trợ phân tích và đề xuất sản phẩm phù hợp nhất 
+                dựa trên nhu cầu thực tế, ngân sách và thói quen sử dụng của bạn. Vui lòng chọn tiêu chí bạn ưu tiên nhất bên dưới:
+            </p>
+        `;
 
-⭐ Đánh giá khách hàng: 4.9/5
+        // Hiện các nút lựa chọn một cách sạch sẽ bằng vòng lặp, không bị lỗi dấu nháy
+        document.getElementById("options").innerHTML = `
+            <button class="btn-option" onclick="hienKetQua('gaming')">🎮 Tối ưu chơi game</button>
+            <button class="btn-option" onclick="hienKetQua('camera')">📸 Chụp ảnh, Quay phim</button>
+            <button class="btn-option" onclick="hienKetQua('battery')">🔋 Pin trâu & Sạc nhanh</button>
+            <button class="btn-option" onclick="hienKetQua('budget')">💰 Giá tốt / Học tập</button>
+        `;
+    }
 
-📌 Đây là sản phẩm bán chạy nhất trong phân khúc dưới 10 triệu đồng.
+    // 3. Hàm xử lý hiển thị kết quả tư vấn chuyên nghiệp
+    function hienKetQua(key) {
+        const luaChon = dataTuVan[key];
+        
+        let danhSachDiemNoiBat = "";
+        luaChon.details.forEach(item => {
+            danhSachDiemNoiBat += `<li>${item}</li>`;
+        });
 
-📞 SmartPhone AI khuyến nghị sản phẩm này nếu bạn cần hiệu năng tốt và mức giá hợp lý.
+        document.getElementById("result").innerHTML = `
+            <div class="result-box">
+                <h3 class="result-title">${luaChon.title}</h3>
+                <p>Dựa trên nhu cầu của bạn, <strong>SmartPhone AI</strong> đề xuất dòng sản phẩm: <strong>${luaChon.recommend}</strong></p>
+                <strong style="font-size: 14px; color: #16a34a;">✨ Ưu điểm cốt lõi lý giải cho đề xuất này:</strong>
+                <ul class="features-list">
+                    ${danhSachDiemNoiBat}
+                </ul>
+            </div>
+        `;
+    }
 
-`)">🎮 Chơi game</button>
+    // Tự động chạy khi trang web load xong
+    window.onload = khoiTaoTuVan;
+</script>
 
-<button onclick="showResult(`
-
-📸 TƯ VẤN CHỤP ẢNH
-
-Nếu bạn yêu thích nhiếp ảnh hoặc sáng tạo nội dung trên mạng xã hội, SmartPhone AI đề xuất iPhone 15.
-
-✨ Ưu điểm nổi bật:
-
-• Camera 48MP cho hình ảnh sắc nét.
-
-• Quay video chất lượng cao.
-
-• Màu sắc trung thực.
-
-• Hiệu năng mạnh mẽ.
-
-• Hỗ trợ cập nhật phần mềm lâu dài.
-
-💰 Giá tham khảo: 17.990.000đ
-
-⭐ Đánh giá khách hàng: 4.9/5
-
-📌 Đây là một trong những mẫu điện thoại được lựa chọn nhiều nhất cho nhu cầu quay video và chụp ảnh.
-
-`)">📸 Chụp ảnh</button>
-
-<button onclick="showResult(`
-
-📚 TƯ VẤN HỌC TẬP & LÀM VIỆC
-
-Samsung Galaxy A36 là lựa chọn cân bằng giữa hiệu năng và chi phí.
-
-✨ Ưu điểm nổi bật:
-
-• Màn hình lớn hỗ trợ học tập và làm việc.
-
-• Pin khỏe sử dụng cả ngày.
-
-• Đa nhiệm ổn định.
-
-• Thiết kế gọn nhẹ.
-
-💰 Giá tham khảo: 7.490.000đ
-
-⭐ Đánh giá khách hàng: 4.8/5
-
-📌 Phù hợp cho học sinh, sinh viên và nhân viên văn phòng.
-
-`)">📚 Học tập</button>
-
-<button onclick="showResult(`
-
-💰 TƯ VẤN TIẾT KIỆM CHI PHÍ
-
-Nếu ngân sách của bạn dưới 5 triệu đồng, SmartPhone AI đề xuất Redmi 14C.
-
-✨ Ưu điểm nổi bật:
-
-• Màn hình lớn.
-
-• Pin dung lượng cao.
-
-• Hiệu năng ổn định cho nhu cầu cơ bản.
-
-• Thiết kế trẻ trung.
-
-💰 Giá tham khảo: 3.990.000đ
-
-📌 Phù hợp cho học tập, giải trí và sử dụng hằng ngày.
-
-`)">💰 Giá rẻ</button>
-
-<button onclick="menu()">⬅ Quay lại</button>
-
-`;
-
-}
+</body>
+</html>
