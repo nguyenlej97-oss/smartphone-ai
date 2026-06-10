@@ -6,71 +6,132 @@
 <title>SmartPhone AI</title>
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
 body{
-    font-family: Arial, sans-serif;
-    background:#f4f4f4;
-    display:flex;
-    justify-content:center;
-    padding:30px;
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-.chatbox{
-    width:500px;
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 0 15px rgba(0,0,0,0.15);
+.chat-container{
+width:100%;
+max-width:650px;
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
 }
 
-h2{
-    text-align:center;
+.header{
+background:#2563eb;
+color:white;
+padding:20px;
+text-align:center;
 }
 
-#message{
-    padding:15px;
-    background:#f0f2f5;
-    border-radius:10px;
-    margin-bottom:15px;
-    min-height:60px;
+.header h1{
+font-size:24px;
+}
+
+.status{
+font-size:14px;
+opacity:0.9;
+}
+
+.chat{
+padding:20px;
+min-height:250px;
+background:#f8fafc;
+}
+
+.bot{
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+margin-bottom:15px;
+}
+
+.buttons{
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
 }
 
 button{
-    width:100%;
-    padding:12px;
-    margin:5px 0;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
 }
 
 button:hover{
-    opacity:0.9;
+background:#1d4ed8;
+transform:translateY(-2px);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.footer{
+padding:10px;
+text-align:center;
+font-size:12px;
+color:#666;
 }
 </style>
 </head>
 
 <body>
 
-<div class="chatbox">
+<div class="chat-container">
 
-<h2>📱 SmartPhone AI</h2>
-
-<div id="message">
-Chào mừng đến Smart Store!<br><br>
-Vui lòng chọn chức năng:
+<div class="header">
+<h1>🤖 SmartPhone AI</h1>
+<div class="status">🟢 Đang trực tuyến</div>
 </div>
 
-<div id="options"></div>
+<div class="chat">
+<div class="bot" id="message">
+Xin chào 👋<br><br>
+Tôi là SmartPhone AI.<br>
+Hãy chọn chức năng bên dưới.
+</div>
+</div>
+
+<div class="buttons" id="options"></div>
+
+<div class="footer">
+© 2026 Smart Store Customer Support
+</div>
 
 </div>
 
 <script>
 
-function menuChinh(){
+function menu(){
 
 document.getElementById("message").innerHTML=
-"📱 Chào mừng đến Smart Store!<br><br>Vui lòng chọn chức năng:";
+`Xin chào 👋<br><br>Vui lòng chọn chức năng:`;
 
 document.getElementById("options").innerHTML=`
 
@@ -82,7 +143,7 @@ document.getElementById("options").innerHTML=`
 
 <button onclick="baoHanh()">🛡️ Bảo hành</button>
 
-<button onclick="lienHe()">📞 Liên hệ</button>
+<button onclick="dangKy()">📝 Đăng ký tư vấn</button>
 
 `;
 
@@ -91,84 +152,93 @@ document.getElementById("options").innerHTML=`
 function tuVan(){
 
 document.getElementById("message").innerHTML=
-"📱 Bạn cần điện thoại cho mục đích nào?";
+`📱 Bạn muốn mua điện thoại cho mục đích nào?`;
 
 document.getElementById("options").innerHTML=`
 
-<button onclick="game()">🎮 Chơi game</button>
+<button onclick="showResult('🎮 Gợi ý:<br><br>POCO X7 Pro<br>Redmi Note 14 Pro<br>Samsung Galaxy A56')">🎮 Chơi game</button>
 
-<button onclick="camera()">📸 Chụp ảnh</button>
+<button onclick="showResult('📸 Gợi ý:<br><br>iPhone 15<br>OPPO Reno 14<br>Vivo V50')">📸 Chụp ảnh</button>
 
-<button onclick="hocTap()">📚 Học tập</button>
+<button onclick="showResult('📚 Gợi ý:<br><br>Samsung A36<br>iPhone 14<br>Redmi Note 14')">📚 Học tập</button>
 
-<button onclick="menuChinh()">⬅ Quay lại</button>
+<button onclick="menu()">⬅ Quay lại</button>
 
 `;
-
-}
-
-function game(){
-
-document.getElementById("message").innerHTML=
-"🎮 Gợi ý:<br><br>• POCO X7 Pro<br>• Redmi Note 14 Pro<br>• Samsung Galaxy A56";
-
-}
-
-function camera(){
-
-document.getElementById("message").innerHTML=
-"📸 Gợi ý:<br><br>• iPhone 15<br>• OPPO Reno 14<br>• Vivo V50";
-
-}
-
-function hocTap(){
-
-document.getElementById("message").innerHTML=
-"📚 Gợi ý:<br><br>• Samsung Galaxy A36<br>• Xiaomi Redmi Note 14<br>• iPhone 14";
 
 }
 
 function bangGia(){
 
 document.getElementById("message").innerHTML=
-"💰 BẢNG GIÁ THAM KHẢO<br><br>iPhone 15: 17.990.000đ<br>Samsung Galaxy A56: 8.990.000đ<br>OPPO Reno 14: 10.990.000đ";
+`💰 BẢNG GIÁ THAM KHẢO<br><br>
+iPhone 15: 17.990.000đ<br>
+Samsung Galaxy A56: 8.990.000đ<br>
+OPPO Reno 14: 10.990.000đ`;
 
 document.getElementById("options").innerHTML=
-'<button onclick="menuChinh()">⬅ Quay lại</button>';
+`<button onclick="menu()">⬅ Quay lại</button>`;
 
 }
 
 function khuyenMai(){
 
 document.getElementById("message").innerHTML=
-"🎁 KHUYẾN MÃI<br><br>• Giảm giá đến 15%<br>• Trả góp 0%<br>• Tặng tai nghe Bluetooth";
+`🎁 KHUYẾN MÃI HIỆN TẠI<br><br>
+✔ Giảm giá đến 15%<br>
+✔ Trả góp 0%<br>
+✔ Tặng tai nghe Bluetooth`;
 
 document.getElementById("options").innerHTML=
-'<button onclick="menuChinh()">⬅ Quay lại</button>';
+`<button onclick="menu()">⬅ Quay lại</button>`;
 
 }
 
 function baoHanh(){
 
 document.getElementById("message").innerHTML=
-"🛡️ Vui lòng liên hệ cửa hàng để kiểm tra bảo hành bằng IMEI.";
+`🛡️ Để kiểm tra bảo hành, vui lòng liên hệ hotline 1900 1234`;
 
 document.getElementById("options").innerHTML=
-'<button onclick="menuChinh()">⬅ Quay lại</button>';
+`<button onclick="menu()">⬅ Quay lại</button>`;
 
 }
 
-function lienHe(){
+function dangKy(){
+
+document.getElementById("message").innerHTML=`
+📝 Đăng ký tư vấn
+<br><br>
+
+<input type="text" placeholder="Họ và tên">
+
+<input type="text" placeholder="Số điện thoại">
+
+<button onclick="gui()">Gửi yêu cầu</button>
+`;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại</button>`;
+
+}
+
+function gui(){
 
 document.getElementById("message").innerHTML=
-"📞 Hotline: 1900 1234<br>Email: support@smartstore.vn";
-
-document.getElementById("options").innerHTML=
-'<button onclick="menuChinh()">⬅ Quay lại</button>';
+`✅ Cảm ơn bạn đã đăng ký.<br><br>Nhân viên sẽ liên hệ trong thời gian sớm nhất.`;
 
 }
 
-menuChinh();
+function showResult(text){
+
+document.getElementById("message").innerHTML=text;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại menu</button>`;
+
+}
+
+menu();
 
 </script>
 
