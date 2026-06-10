@@ -1,304 +1,245 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPhone AI - Trợ Lý Tư Vấn Cá Nhân</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #0071e3;
-            --bg: #f5f5f7;
-            --card: #ffffff;
-            --text: #1d1d1f;
-            --text-muted: #6e6e73;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartPhone AI</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
 
-        .quiz-container {
-            background: var(--card);
-            max-width: 520px;
-            width: 100%;
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
-        }
+.chat-container{
+width:100%;
+max-width:650px;
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
 
-        .progress-bar {
-            height: 6px;
-            background: #e5e5e7;
-            border-radius: 3px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 33%;
-            transition: width 0.3s ease;
-        }
+.header{
+background:#2563eb;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-        h2 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-            line-height: 1.3;
-        }
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.4;
-        }
+.header h1{
+font-size:24px;
+}
 
-        .step { display: none; }
-        .step.active { display: block; animation: fadeIn 0.4s ease; }
+.status{
+font-size:14px;
+opacity:0.9;
+}
 
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 30px;
-        }
+.chat{
+padding:20px;
+min-height:250px;
+background:#f8fafc;
+}
 
-        .option-item { display: block; cursor: pointer; }
-        .option-item input { display: none; }
-        
-        .option-card {
-            background: #ffffff;
-            border: 1px solid #e5e5e7;
-            padding: 18px 20px;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .option-item:hover .option-card {
-            border-color: #b4b4b6;
-            background: #fafafa;
-        }
-        .option-item input:checked + .option-card {
-            border-color: var(--primary);
-            background: rgba(0, 113, 227, 0.04);
-            font-weight: 600;
-            box-shadow: 0 0 0 1px var(--primary);
-        }
+.bot{
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+margin-bottom:15px;
+}
 
-        .nav-buttons { display: flex; gap: 12px; }
-        .btn {
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-        .btn-back { background: #e5e5e7; color: var(--text); }
-        .btn-back:hover { background: #d2d2d7; }
-        .btn-next { background: var(--primary); color: white; margin-left: auto; }
-        .btn-next:hover { background: #0066cc; }
+.buttons{
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
 
-        /* Giao diện hộp thoại tư vấn cá nhân */
-        .advisor-speech {
-            background: #fbfbfd;
-            border: 1px solid #e5e5e7;
-            padding: 24px;
-            border-radius: 16px;
-            margin-top: 15px;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-        .advisor-avatar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .rec-box {
-            background: rgba(0, 113, 227, 0.05);
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            border-radius: 4px 12px 12px 4px;
-            margin: 15px 0;
-            font-weight: 600;
-        }
+button{
+padding:14px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+button:hover{
+background:#1d4ed8;
+transform:translateY(-2px);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.footer{
+padding:10px;
+text-align:center;
+font-size:12px;
+color:#666;
+}
+</style>
 </head>
+
 <body>
 
-<div class="quiz-container">
-    <div class="progress-bar">
-        <div id="progress" class="progress-fill"></div>
-    </div>
+<div class="chat-container">
 
-    <div id="step1" class="step active">
-        <h2>Chào bạn, mục đích chính khi bạn tìm mua chiếc điện thoại mới này là gì?</h2>
-        <p class="subtitle">Hãy chọn trải nghiệm mà bạn muốn chiếc máy phục vụ tốt nhất nhé.</p>
-        <div class="options-list">
-            <label class="option-item">
-                <input type="radio" name="nhuCau" value="gaming" checked>
-                <div class="option-card">🎮 Mình muốn một cấu hình thật mạnh để cày game mượt mà</div>
-            </label>
-            <label class="option-item">
-                <input type="radio" name="nhuCau" value="camera">
-                <div class="option-card">📸 Mình chú trọng camera để chụp ảnh và quay video thật nét</div>
-            </label>
-            <label class="option-item">
-                <input type="radio" name="nhuCau" value="hocTap">
-                <div class="option-card">📚 Mình cần máy chạy ổn định, pin trâu để học tập và làm việc</div>
-            </label>
-        </div>
-        <div class="nav-buttons">
-            <button class="btn btn-next" onclick="chuyenBuoc(2)">Tiếp theo →</button>
-        </div>
-    </div>
+<div class="header">
+<h1>🤖 SmartPhone AI</h1>
+<div class="status">🟢 Đang trực tuyến</div>
+</div>
 
-    <div id="step2" class="step">
-        <h2>Hạn mức chi phí mà bạn cảm thấy thoải mái nhất để đầu tư là bao nhiêu?</h2>
-        <p class="subtitle">Yếu tố này sẽ giúp mình lọc ra chiếc máy có giá trị sử dụng tối ưu nhất trên từng đồng chi phí.</p>
-        <div class="options-list">
-            <label class="option-item">
-                <input type="radio" name="nganSach" value="thap" checked>
-                <div class="option-card">💰 Mình muốn tiết kiệm tối đa, ngân sách dưới 7 triệu</div>
-            </label>
-            <label class="option-item">
-                <input type="radio" name="nganSach" value="trung">
-                <div class="option-card">💎 Tầm trung, dao động từ 7 đến 15 triệu là hợp lý</div>
-            </label>
-            <label class="option-item">
-                <input type="radio" name="nganSach" value="cao">
-                <div class="option-card">👑 Mình sẵn sàng đầu tư phân khúc cao cấp, trên 15 triệu</div>
-            </label>
-        </div>
-        <div class="nav-buttons">
-            <button class="btn btn-back" onclick="chuyenBuoc(1)">← Quay lại</button>
-            <button class="btn btn-next" onclick="tínhToanKetQua()">Phân tích kết quả</button>
-        </div>
-    </div>
+<div class="chat">
+<div class="bot" id="message">
+Xin chào 👋<br><br>
+Tôi là SmartPhone AI.<br>
+Hãy chọn chức năng bên dưới.
+</div>
+</div>
 
-    <div id="step3" class="step">
-        <h2>Kết quả phân tích từ Trợ lý AI</h2>
-        <p class="subtitle">Dựa trên những chia sẻ thực tế về nhu cầu của bạn, đây là lời khuyên dành riêng cho bạn:</p>
-        
-        <div class="advisor-speech">
-            <div class="advisor-avatar">
-                🤖 Chuyên Gia Tư Vấn Điện Thoại
-            </div>
-            <div id="loiChaoKhach"></div>
-            
-            <div id="goiYMay" class="rec-box"></div>
-            
-            <div id="loiKhuyenChuyenSau" style="color: var(--text-muted);"></div>
-        </div>
+<div class="buttons" id="options"></div>
 
-        <div class="nav-buttons" style="margin-top: 25px;">
-            <button class="btn btn-back" onclick="chuyenBuoc(1)" style="width: 100%; text-align: center;">Tư vấn lại từ đầu ↺</button>
-        </div>
-    </div>
+<div class="footer">
+© 2026 Smart Store Customer Support
+</div>
+
 </div>
 
 <script>
-    function chuyenBuoc(buoc) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step' + buoc).classList.add('active');
 
-        const progressFill = document.getElementById('progress');
-        if (buoc === 1) progressFill.style.width = '33%';
-        if (buoc === 2) progressFill.style.width = '66%';
-        if (buoc === 3) progressFill.style.width = '100%';
-    }
+function menu(){
 
-    function tínhToanKetQua() {
-        const nhuCau = document.querySelector('input[name="nhuCau"]:checked').value;
-        const nganSach = document.querySelector('input[name="nganSach"]:checked').value;
+document.getElementById("message").innerHTML=
+`Xin chào 👋<br><br>Vui lòng chọn chức năng:`;
 
-        let loiChao = "";
-        let goiY = "";
-        let loiKhuyen = "";
+document.getElementById("options").innerHTML=`
 
-        // TÌNH HUỐNG 1: CHƠI GAME
-        if (nhuCau === 'gaming') {
-            loiChao = "Mình hiểu một game thủ luôn cần một chiếc máy có hiệu năng thật bền bỉ để không bị ức chế khi leo rank. Tuy nhiên, vì bạn muốn tối ưu chi phí ở mức <strong>dưới 7 triệu</strong>, chúng ta sẽ tập trung hoàn toàn vào chip và pin.";
-            goiY = "💡 Thiết bị phù hợp nhất cho bạn: Tecno Pova 6 hoặc Redmi Note 13 Pro";
-            loiKhuyen = "Với tầm giá này, mình khuyên bạn không nên quá đòi hỏi vào camera hay thiết kế sang chảnh. Hai chiếc máy này sở hữu viên pin cực kỳ trâu kèm màn hình tần số quét cao, giúp các thao tác vuốt chạm tung chiêu của bạn mượt mà và không lo sập nguồn giữa trận đấu.";
-            
-            if (nganSach === 'trung') {
-                loiChao = "Tuyệt vời, với ngân sách <strong>từ 7 đến 15 triệu</strong>, bạn đã có một không gian rất tốt để lựa chọn một cỗ máy chiến game có hệ thống tản nhiệt xịn và màn hình đẹp.";
-                goiY = "💡 Thiết bị phù hợp nhất cho bạn: Samsung Galaxy A56 Chính Hãng";
-                loiKhuyen = "Chiếc máy này sở hữu dòng chip xử lý thế hệ mới tối ưu đồ họa cực mượt. Lời khuyên của mình dành cho bạn là hãy tự tin bật thiết lập FPS cao trong các tựa game như Liên Quân hay PUBG Mobile, hệ thống tản nhiệt buồng hơi trên máy sẽ giữ thiết bị luôn mát mẻ và ổn định xuyên suốt các trận combat.";
-            } else if (nganSach === 'cao') {
-                loiChao = "Với mức đầu tư <strong>trên 15 triệu</strong>, bạn rõ ràng đang tìm kiếm một trải nghiệm chiến game đỉnh cao, không chấp nhận bất kỳ sự giật lag nào dù là nhỏ nhất.";
-                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 15 Pro Max hoặc ROG Phone 8";
-                loiKhuyen = "Đây là những 'quái vật hiệu năng' ở thời điểm hiện tại. Lời khuyên từ chuyên gia là bạn hoàn toàn có thể cân mượt mọi tựa game nặng nhất thế giới ở mức cấu hình Max Setting. Độ trễ hệ thống gần như bằng 0 sẽ mang lại cho bạn lợi thế phản xạ tuyệt đối trước đối thủ.";
-            }
-        } 
-        
-        // TÌNH HUỐNG 2: CHỤP ẢNH
-        else if (nhuCau === 'camera') {
-            loiChao = "Để phục vụ đam mê nhiếp ảnh với mức ngân sách tiết kiệm <strong>dưới 7 triệu</strong>, chúng ta sẽ chọn những chiếc máy có thuật toán phần mềm xử lý ảnh tốt để bù đắp cho phần cứng.";
-            goiY = "💡 Thiết bị phù hợp nhất cho bạn: Oppo A78 hoặc Vivo Y36";
-            loiKhuyen = "Thay vì các thông số hầm hố, hai dòng máy này được tích hợp AI làm đẹp cực kỳ thông minh. Lời khuyên của mình là bạn nên chụp ở môi trường đủ sáng, máy sẽ cho ra những bức ảnh chân dung bắt mắt, màu da mịn màng nịnh mắt mà không cần tốn công chỉnh sửa qua app ứng dụng bên thứ ba.";
-            
-            if (nganSach === 'trung') {
-                loiChao = "Chào bạn, với tài chính <strong>7 - 15 triệu</strong> đầu tư cho camera, bạn đã có thể tiếp cận công nghệ chống rung của các dòng flagship cận cao cấp rồi.";
-                goiY = "💡 Thiết bị phù hợp nhất cho bạn: Samsung Galaxy S23 FE";
-                loiKhuyen = "Điểm đáng tiền nhất ở chiếc máy này là hệ thống ống kính có chống rung quang học OIS. Nếu bạn có sở thích quay video ngắn, làm Tiktok hay Reels, đây là lựa chọn cực tốt vì hình ảnh sẽ không bị rung lắc, thuật toán xử lý ảnh đêm cũng rất trong trẻo, ít bị nhiễu hạt.";
-            } else if (nganSach === 'cao') {
-                loiChao = "Bạn là người cực kỳ khắt khe về chất lượng hình ảnh và có thể đang làm công việc sáng tạo nội dung chuyên nghiệp, mức đầu tư <strong>trên 15 triệu</strong> là hoàn toàn xứng đáng.";
-                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 15 Pro hoặc Galaxy S24 Ultra";
-                loiKhuyen = "Hệ thống thấu kính và cảm biến lớn trên các dòng máy này thu trọn mọi chi tiết ánh sáng. Mình khuyên bạn nên thử nghiệm tính năng quay video chuẩn điện ảnh Cinematic hoặc chụp ảnh định dạng RAW, bạn sẽ có những thước phim chân thực, sắc nét và giữ nguyên được chiều sâu nghệ thuật để hậu kỳ.";
-            }
-        } 
-        
-        // TÌNH HUỐNG 3: HỌC TẬP, ĐI LÀM
-        else if (nhuCau === 'hocTap') {
-            loiChao = "Nếu mục tiêu là phục vụ học tập ổn định với chi phí tối ưu <strong>dưới 7 triệu</strong>, ưu tiên hàng đầu của chúng ta là một không gian màn hình lớn và độ bền cao.";
-            goiY = "💡 Thiết bị phù hợp nhất cho bạn: Xiaomi Redmi 13";
-            loiKhuyen = "Chiếc máy này đáp ứng rất mượt các tác vụ tra cứu tài liệu, lướt mạng xã hội và xem bài giảng trực tuyến trực quan nhờ màn hình rộng rãi. Viên pin lớn giúp bạn thoải mái mang máy lên giảng đường cả ngày dài mà không cần đem theo cục sạc cồng kềnh.";
-            
-            if (nganSach === 'trung') {
-                loiChao = "Với mức ngân sách tầm trung <strong>7 - 15 triệu</strong>, bạn hoàn toàn có thể sở hữu một thiết bị vừa sang trọng vừa có tuổi thọ sử dụng lâu dài suốt nhiều năm đại học.";
-                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 13 (128GB) hoặc Galaxy A35";
-                loiKhuyen = "Lời khuyên của mình là hãy ưu tiên sự tối ưu của hệ điều hành. Những chiếc máy này có khả năng đa nhiệm rất tốt, chuyển đổi qua lại giữa các ứng dụng mượt mà và đặc biệt là linh kiện rất bền, giúp bạn yên tâm sử dụng ổn định suốt 3-4 năm tới mà không lo máy bị chậm đi.";
-            } else if (nganSach === 'cao') {
-                loiChao = "Khi bạn sẵn sàng đầu tư <strong>trên 15 triệu</strong> cho một chiếc máy làm việc, bạn xứng đáng nhận được trải nghiệm đỉnh cao và toàn diện nhất.";
-                goiY = "💡 Thiết bị phù hợp nhất cho bạn: iPhone 15 Plus";
-                loiKhuyen = "Chiếc máy này giống như một văn phòng thu nhỏ nhờ sự kết hợp giữa màn hình lớn siêu nét và viên pin thuộc hàng tốt nhất thị trường. Bạn có thể xử lý các tệp tài liệu, file Excel hay check mail công việc mượt mà liên tục. Hơn nữa, dòng máy cao cấp này luôn giữ giá tốt và được nhà sản xuất cập nhật phần mềm rất lâu dài.";
-            }
-        }
+<button onclick="tuVan()">📱 Tư vấn điện thoại</button>
 
-        // Đổ văn bản đối thoại vào giao diện
-        document.getElementById("loiChaoKhach").innerHTML = loiChao;
-        document.getElementById("goiYMay").innerHTML = goiY;
-        document.getElementById("loiKhuyenChuyenSau").innerHTML = loiKhuyen;
+<button onclick="bangGia()">💰 Bảng giá</button>
 
-        chuyenBuoc(3);
-    }
+<button onclick="khuyenMai()">🎁 Khuyến mãi</button>
+
+<button onclick="baoHanh()">🛡️ Bảo hành</button>
+
+<button onclick="dangKy()">📝 Đăng ký tư vấn</button>
+
+`;
+
+}
+
+function tuVan(){
+
+document.getElementById("message").innerHTML=
+`📱 Bạn muốn mua điện thoại cho mục đích nào?`;
+
+document.getElementById("options").innerHTML=`
+
+<button onclick="showResult('🎮 Gợi ý:<br><br>POCO X7 Pro<br>Redmi Note 14 Pro<br>Samsung Galaxy A56')">🎮 Chơi game</button>
+
+<button onclick="showResult('📸 Gợi ý:<br><br>iPhone 15<br>OPPO Reno 14<br>Vivo V50')">📸 Chụp ảnh</button>
+
+<button onclick="showResult('📚 Gợi ý:<br><br>Samsung A36<br>iPhone 14<br>Redmi Note 14')">📚 Học tập</button>
+
+<button onclick="menu()">⬅ Quay lại</button>
+
+`;
+
+}
+
+function bangGia(){
+
+document.getElementById("message").innerHTML=
+`💰 BẢNG GIÁ THAM KHẢO<br><br>
+iPhone 15: 17.990.000đ<br>
+Samsung Galaxy A56: 8.990.000đ<br>
+OPPO Reno 14: 10.990.000đ`;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại</button>`;
+
+}
+
+function khuyenMai(){
+
+document.getElementById("message").innerHTML=
+`🎁 KHUYẾN MÃI HIỆN TẠI<br><br>
+✔ Giảm giá đến 15%<br>
+✔ Trả góp 0%<br>
+✔ Tặng tai nghe Bluetooth`;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại</button>`;
+
+}
+
+function baoHanh(){
+
+document.getElementById("message").innerHTML=
+`🛡️ Để kiểm tra bảo hành, vui lòng liên hệ hotline 1900 1234`;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại</button>`;
+
+}
+
+function dangKy(){
+
+document.getElementById("message").innerHTML=`
+📝 Đăng ký tư vấn
+<br><br>
+
+<input type="text" placeholder="Họ và tên">
+
+<input type="text" placeholder="Số điện thoại">
+
+<button onclick="gui()">Gửi yêu cầu</button>
+`;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại</button>`;
+
+}
+
+function gui(){
+
+document.getElementById("message").innerHTML=
+`✅ Cảm ơn bạn đã đăng ký.<br><br>Nhân viên sẽ liên hệ trong thời gian sớm nhất.`;
+
+}
+
+function showResult(text){
+
+document.getElementById("message").innerHTML=text;
+
+document.getElementById("options").innerHTML=
+`<button onclick="menu()">⬅ Quay lại menu</button>`;
+
+}
+
+menu();
+
 </script>
 
 </body>
