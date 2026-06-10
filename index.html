@@ -1,18 +1,33 @@
-<button onclick="showResult(`🎮 TƯ VẤN ĐIỆN THOẠI CHƠI GAME
+function tuVan(){
 
-Dựa trên nhu cầu chơi game của bạn, SmartPhone AI đề xuất Samsung Galaxy A56 là một trong những sản phẩm nổi bật nhất hiện nay.
+document.getElementById("message").innerHTML=
+`🤖 SMARTPHONE AI PREMIUM
+
+Xin chào quý khách.
+
+SmartPhone AI sẽ hỗ trợ lựa chọn sản phẩm phù hợp dựa trên nhu cầu sử dụng thực tế, ngân sách và các tiêu chí quan trọng như hiệu năng, camera, pin và độ bền.
+
+Vui lòng chọn nhu cầu chính của bạn bên dưới để nhận tư vấn chi tiết.`;
+
+document.getElementById("options").innerHTML=`
+
+<button onclick="showResult(`
+
+🎮 TƯ VẤN CHƠI GAME
+
+Dựa trên nhu cầu chơi game, SmartPhone AI đề xuất Samsung Galaxy A56.
 
 ✨ Ưu điểm nổi bật:
 
 • Màn hình Super AMOLED 120Hz cho trải nghiệm mượt mà.
 
-• Hiệu năng mạnh mẽ đáp ứng tốt các tựa game phổ biến như Liên Quân Mobile, PUBG Mobile và Free Fire.
+• Hiệu năng mạnh mẽ đáp ứng tốt Liên Quân Mobile, PUBG Mobile, Free Fire và nhiều tựa game phổ biến khác.
 
-• Pin 5000mAh giúp sử dụng liên tục trong thời gian dài.
+• Pin dung lượng 5000mAh cho thời gian sử dụng dài.
 
-• Công nghệ sạc nhanh giúp tiết kiệm thời gian sạc.
+• Sạc nhanh giúp tiết kiệm thời gian chờ đợi.
 
-• Thiết kế hiện đại, sang trọng và bền bỉ.
+• Thiết kế hiện đại, phù hợp học sinh, sinh viên và người yêu thích công nghệ.
 
 💰 Giá tham khảo: 8.990.000đ
 
@@ -20,37 +35,45 @@ Dựa trên nhu cầu chơi game của bạn, SmartPhone AI đề xuất Samsung
 
 📌 Đây là sản phẩm bán chạy nhất trong phân khúc dưới 10 triệu đồng.
 
-📞 SmartPhone AI khuyến nghị sản phẩm này nếu bạn cần hiệu năng tốt, pin khỏe và mức giá hợp lý.`)">🎮 Chơi game</button>
+📞 SmartPhone AI khuyến nghị sản phẩm này nếu bạn cần hiệu năng tốt và mức giá hợp lý.
 
-<button onclick="showResult(`📸 TƯ VẤN ĐIỆN THOẠI CHỤP ẢNH
+`)">🎮 Chơi game</button>
 
-Nếu bạn thường xuyên chụp ảnh, quay video hoặc sáng tạo nội dung trên mạng xã hội, SmartPhone AI đề xuất iPhone 15.
+<button onclick="showResult(`
+
+📸 TƯ VẤN CHỤP ẢNH
+
+Nếu bạn yêu thích nhiếp ảnh hoặc sáng tạo nội dung trên mạng xã hội, SmartPhone AI đề xuất iPhone 15.
 
 ✨ Ưu điểm nổi bật:
 
-• Camera 48MP sắc nét.
+• Camera 48MP cho hình ảnh sắc nét.
 
 • Quay video chất lượng cao.
+
+• Màu sắc trung thực.
 
 • Hiệu năng mạnh mẽ.
 
 • Hỗ trợ cập nhật phần mềm lâu dài.
 
-• Thiết kế cao cấp và sang trọng.
-
 💰 Giá tham khảo: 17.990.000đ
 
 ⭐ Đánh giá khách hàng: 4.9/5
 
-📌 Đây là một trong những mẫu điện thoại được yêu thích nhất dành cho nhu cầu chụp ảnh và quay video.`)">📸 Chụp ảnh</button>
+📌 Đây là một trong những mẫu điện thoại được lựa chọn nhiều nhất cho nhu cầu quay video và chụp ảnh.
 
-<button onclick="showResult(`📚 TƯ VẤN HỌC TẬP VÀ LÀM VIỆC
+`)">📸 Chụp ảnh</button>
 
-Samsung Galaxy A36 là lựa chọn cân bằng giữa hiệu năng, thời lượng pin và chi phí.
+<button onclick="showResult(`
+
+📚 TƯ VẤN HỌC TẬP & LÀM VIỆC
+
+Samsung Galaxy A36 là lựa chọn cân bằng giữa hiệu năng và chi phí.
 
 ✨ Ưu điểm nổi bật:
 
-• Màn hình lớn hỗ trợ đọc tài liệu dễ dàng.
+• Màn hình lớn hỗ trợ học tập và làm việc.
 
 • Pin khỏe sử dụng cả ngày.
 
@@ -62,20 +85,34 @@ Samsung Galaxy A36 là lựa chọn cân bằng giữa hiệu năng, thời lư�
 
 ⭐ Đánh giá khách hàng: 4.8/5
 
-📌 Phù hợp cho học sinh, sinh viên và nhân viên văn phòng.`)">📚 Học tập</button>
+📌 Phù hợp cho học sinh, sinh viên và nhân viên văn phòng.
 
-<button onclick="showResult(`💰 TƯ VẤN ĐIỆN THOẠI GIÁ RẺ
+`)">📚 Học tập</button>
 
-Nếu ngân sách dưới 5 triệu đồng, SmartPhone AI đề xuất Redmi 14C.
+<button onclick="showResult(`
 
-✔ Màn hình lớn.
+💰 TƯ VẤN TIẾT KIỆM CHI PHÍ
 
-✔ Pin dung lượng cao.
+Nếu ngân sách của bạn dưới 5 triệu đồng, SmartPhone AI đề xuất Redmi 14C.
 
-✔ Đáp ứng tốt nhu cầu học tập, giải trí cơ bản.
+✨ Ưu điểm nổi bật:
+
+• Màn hình lớn.
+
+• Pin dung lượng cao.
+
+• Hiệu năng ổn định cho nhu cầu cơ bản.
+
+• Thiết kế trẻ trung.
 
 💰 Giá tham khảo: 3.990.000đ
 
-📌 Sản phẩm phù hợp với học sinh và người dùng phổ thông.`)">💰 Giá rẻ</button>
+📌 Phù hợp cho học tập, giải trí và sử dụng hằng ngày.
+
+`)">💰 Giá rẻ</button>
 
 <button onclick="menu()">⬅ Quay lại</button>
+
+`;
+
+}
